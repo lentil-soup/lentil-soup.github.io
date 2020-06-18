@@ -31,7 +31,7 @@ I care a lot about making data science accountable to the people affected by it.
         var calendarEl = document.getElementById('calendar');
 
         var calendar = new FullCalendar.Calendar(calendarEl, {
-          plugins: [ 'dayGrid', 'googleCalendar' ],
+          plugins: [ 'dayGrid', 'googleCalendar', 'interaction' ],
           googleCalendarApiKey: 'AIzaSyD4CqAKvTvmDtJXhuqqPdydpJ6cbn4-nO8',
 		  events: {
 		    googleCalendarId: 'asmithh99@gmail.com'
@@ -40,5 +40,41 @@ I care a lot about making data science accountable to the people affected by it.
         calendar.render();
       });
 </script>
+<form>
+	Start datetime: <input type="datetime-local", id="start_dt", name='start_dt' /> 
+	End datetime: <input type="datetime-local", id="end_dt", name='end_dt' /> 
+
+	ID: <input type='text' id='my_id', name='my_id' />
+	summary: <input type='text' id='summary', name='summary' />
+	description: <input type='text' id='description', name='description' />
+	<input type="button" value="Schedule" onclick="Schedule()" />
+	</form>
+<script>
+	function Schedule(){
+		var start_dt = document.getElementById("start_dt").value
+		var end_dt = document.getElementById("end_dt").value
+		var my_id = document.getElementById('my_id').value
+		var summary = document.getElementById('summary').value
+		var description = document.getElementById('description').value
+	 var DISCOVERY_DOCS = ["https://www.googleapis.com/discovery/v1/apis/calendar/v3/rest"];
+	 var SCOPES = "https://www.googleapis.com/auth/calendar"
+	gapi.client.init({
+          apiKey: 'AIzaSyD4CqAKvTvmDtJXhuqqPdydpJ6cbn4-nO8',
+          clientId: 'asmithh99@gmail.com',
+          discoveryDocs: DISCOVERY_DOCS,
+          scope: SCOPES
+        })
+	gapi.client.calendar.events.insert('asmithh99@gmail.com', {"start": {
+    "dateTime": start_dt,
+    "timeZone": 'US/Eastern'
+  },
+  "end": {
+    "dateTime": end_dt,
+    "timeZone": 'US/Eastern'
+  },
+"id": my_id,
+"summary": summary,
+"description": description})}
+	</script>
 <div id='calendar'></div>
 </html>
