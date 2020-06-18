@@ -70,7 +70,7 @@ I care a lot about making data science accountable to the people affected by it.
           	scope: SCOPES
         	})
         	gapi.client.load('calendar', 'v3', function() {
-		gapi.client.calendar.events.insert('asmithh99@gmail.com', {'calendarId': 'asmithh99@gmail.com', "start": {
+		gapi.client.calendar.events.insert({'calendarId': 'asmithh99@gmail.com', {'resource': {"start": {
 	
     "dateTime": start_dt,
     "timeZone": 'US/Eastern'
@@ -81,7 +81,7 @@ I care a lot about making data science accountable to the people affected by it.
   },
 "id": my_id,
 "summary": summary,
-"description": description})})
+"description": description})}})
 		}
 
 		}
